@@ -2,9 +2,9 @@
 #include "mergesort.h"
 
 
-void mergeRanges(int[] values, int startIndex, int midPoint, int endIndex) {
+void mergeRanges(int* values, int startIndex, int midPoint, int endIndex) {
 	int rangeSize = endIndex - startIndex;
-	int destination[] = (int[])calloc(rangeSize,sizeof(int));
+	int* destination = (int*) calloc(rangeSize,sizeof(int));
 	int firstIndex = startIndex;
 	int secondIndex = midPoint;
 	int copyIndex = 0;
@@ -16,7 +16,7 @@ void mergeRanges(int[] values, int startIndex, int midPoint, int endIndex) {
 			destination[copyIndex] = values[secondIndex];
 			++secondIndex;
 		}
-		++copyindex;
+		++copyIndex;
 	}
 	while(firstIndex < midPoint){
 		destination[copyIndex] = values[firstIndex];
@@ -34,7 +34,13 @@ void mergeRanges(int[] values, int startIndex, int midPoint, int endIndex) {
 	free(destination);
 }
 
-void mergesortRange(int [] values, int startIndex, int endIndex){
+bool needsSorting(int rangeSize) {
+    return rangeSize >= 2;
+  }
+
+
+
+void mergesortRange(int*  values, int startIndex, int endIndex){
 	int rangeSize = endIndex - startIndex;
 	if(needsSorting(rangeSize)){
 		int midPoint = (startIndex +endIndex)/2;
