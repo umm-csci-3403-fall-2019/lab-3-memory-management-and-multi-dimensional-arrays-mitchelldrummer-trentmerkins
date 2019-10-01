@@ -31,12 +31,16 @@ int* array_merge(int num_arrays, int* sizes, int** values) {
 	int* final = (int*) calloc(size,sizeof(int));
 	final[0]=size;
 
-	for(int i=0; i<sum;i++){
+	for(int i=0; i<sum-1;i++){
                 if(sort[i] != sort[i+1]){
                 	final[count]=sort[i];
 			count++;
                 }
+	
         }
+	if(sort[sum-1] != sort[sum]){
+		final[count]=sort[sum-1];
+	}
 	free(sort);
 
 	/*  printf("FinalArray contents [ ");
