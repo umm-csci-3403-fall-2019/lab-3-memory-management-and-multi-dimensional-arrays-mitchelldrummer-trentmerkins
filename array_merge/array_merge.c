@@ -7,7 +7,7 @@ int* array_merge(int num_arrays, int* sizes, int** values) {
 	int m = num_arrays;
 	int sum =0;
 	int startindex=0;
-	int size=0;
+	int size=1;
 	int count=1;
 
 	for(int i=0; i<m;++i){
@@ -23,22 +23,28 @@ int* array_merge(int num_arrays, int* sizes, int** values) {
 		startindex+=sizes[i];	
 	}
 	mergesort(sum,sort);
-	for(int i=0; i<sum;i++){
+	for(int i=0; i<=sum-2;i++){
 		if(sort[i] != sort[i+1]){
 		size++;
 		}
 	}
-	int* final = (int*) calloc(size,sizeof(int));
-	final[0]=size;
 
-	for(int i=0; i<sum-1;i++){
+	int* final = (int*) calloc(size+1,sizeof(int));
+	if(sum==0){
+		final[0]=size-1;
+	}
+	else{
+		final[0]=size;
+	}
+
+	for(int i=0; i<=sum-2;i++){
                 if(sort[i] != sort[i+1]){
                 	final[count]=sort[i];
 			count++;
                 }
 	
         }
-	if(sort[sum-1] != sort[sum]){
+	if(sum>0){
 		final[count]=sort[sum-1];
 	}
 	free(sort);
@@ -46,7 +52,7 @@ int* array_merge(int num_arrays, int* sizes, int** values) {
 	/*  printf("FinalArray contents [ ");
 
 	for(int i=0; i<size+1;i++){
-		printf(" %d ", final[i]);
+		PRINtf(" %d ", final[i]);
 	}
 	printf(" ]");*/
 
